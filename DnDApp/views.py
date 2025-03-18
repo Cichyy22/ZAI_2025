@@ -39,7 +39,7 @@ class CampaignList(generics.ListCreateAPIView):
     pagination_class = StandardResultsSetPagination
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = ['name', 'status']
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
     filterset_fields = ['status']
     name = 'campaign-list'
 
@@ -59,6 +59,7 @@ class CharacterList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
     ordering_fields = ['name', 'level']
     filterset_fields = ['race', 'character_class']
+    filterset_fields = ['campaign']
     name = 'character-list'
 
 
@@ -72,6 +73,7 @@ class CharacterDetail(generics.RetrieveUpdateDestroyAPIView):
 class NPCList(generics.ListCreateAPIView):
     queryset = NPC.objects.all()
     serializer_class = NPCSerializer
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = [IsAdminUser]
     name = 'npc-list'
 
@@ -86,6 +88,7 @@ class NPCDetail(generics.RetrieveUpdateDestroyAPIView):
 class MonsterList(generics.ListCreateAPIView):
     queryset = Monster.objects.all()
     serializer_class = MonsterSerializer
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = [IsAdminUser]
     name = 'monster-list'
 
@@ -100,6 +103,7 @@ class MonsterDetail(generics.RetrieveUpdateDestroyAPIView):
 class ItemList(generics.ListCreateAPIView):
     queryset = Item.objects.all()
     serializer_class = ItemSerializer
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = [IsAdminUser]
     name = 'item-list'
 
@@ -114,6 +118,7 @@ class ItemDetail(generics.RetrieveUpdateDestroyAPIView):
 class QuestList(generics.ListCreateAPIView):
     queryset = Quest.objects.all()
     serializer_class = QuestSerializer
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = [IsAuthenticated]
     name = 'quest-list'
 
@@ -128,6 +133,7 @@ class QuestDetail(generics.RetrieveUpdateDestroyAPIView):
 class EventList(generics.ListCreateAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = [IsAuthenticated]
     name = 'event-list'
 
@@ -135,6 +141,7 @@ class EventList(generics.ListCreateAPIView):
 class EventDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     permission_classes = [IsAdminUser]
     name = 'event-detail'
 
