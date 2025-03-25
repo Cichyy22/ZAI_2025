@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django_filters',
     'DnDApp',
     'rest_framework_simplejwt',
+    'graphene_django',
+    'graphql_DnD',
 ]
 
 MIDDLEWARE = [
