@@ -83,9 +83,7 @@ class GraphQLTestCase(TestCase):
         response = self.client.execute(query)
         self.assertEqual(response["data"]["campaign"]["name"], "Test Campaign")
 
-    # Analogiczne testy dla NPC, Monster, Item, Quest, Event...
 
-    # --------------- MUTATIONS TESTS ----------------
 
     def test_create_character(self):
         mutation = f"""
@@ -205,7 +203,6 @@ class GraphQLTestCase(TestCase):
         response = self.client.execute(query)
         self.assertEqual(response["data"]["allEvents"][0]["title"], "Battle of Helm's Deep")
 
-    # --------------- MUTATIONS TESTS ----------------
 
     def test_update_monster(self):
         mutation = f"""

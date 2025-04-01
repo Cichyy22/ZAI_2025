@@ -1,10 +1,10 @@
-from DnDApp.models import Character, Campaign, NPC, Monster, Item, Quest, Event  # Import modeli
+from DnDApp.models import Character, Campaign, NPC, Monster, Item, Quest, Event
 import graphene
 from django.db import models
 from graphene_django.types import DjangoObjectType
 from django.contrib.auth.models import User
 
-# Definicje typów dla modeli Django
+
 class UserType(DjangoObjectType):
     class Meta:
         model = User
@@ -46,7 +46,7 @@ class EventType(DjangoObjectType):
         fields = "__all__"
 
 
-# Query (Pobieranie danych)
+
 class Query(graphene.ObjectType):
     all_characters = graphene.List(CharacterType)
     character = graphene.Field(CharacterType, id=graphene.Int())
@@ -69,7 +69,6 @@ class Query(graphene.ObjectType):
     all_events = graphene.List(EventType)
     event = graphene.Field(EventType, id=graphene.Int())
 
-    # Resolvers - Pobieranie danych
     def resolve_all_characters(self, info):
         return Character.objects.all()
 
@@ -113,18 +112,18 @@ class Query(graphene.ObjectType):
         return Event.objects.filter(id=id).first()
 
 
-# Mutacje CRUD dla każdego modelu
+
 class CreateCharacter(graphene.Mutation):
     class Arguments:
         name = graphene.String(required=True)
         race = graphene.String(required=True)
-        character_class = graphene.String(required=True)  # To zostaje bez zmian w Pythonie
+        character_class = graphene.String(required=True)
         level = graphene.Int(required=True)
         gold = graphene.Float()
         user_id = graphene.Int(required=True)
         campaign_id = graphene.Int(required=True)
 
-    character = graphene.Field(CharacterType)  # <-- Poprawione, by zgadzało się z zapytaniem GraphQL
+    character = graphene.Field(CharacterType)
 
     def mutate(self, info, name, race, character_class, level, user_id, campaign_id, gold=0):
         user = User.objects.get(id=user_id)
